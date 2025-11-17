@@ -1,0 +1,18 @@
+#!/bin/bash
+# ctm - convert Windows path to /mnt style (global)
+
+if [ -z "$1" ]; then
+    echo "Usage: ctm C:\\path\\to\\file.txt"
+    exit 1
+fi
+
+# Strip quotes if provided
+Path="${1%\"}"
+Path="${Path#\"}"
+
+# Lowercase drive letter and convert path
+DriveLetter=$(echo "${Path:0:1}" | tr '[:upper:]' '[:lower:]')
+Rest="${Path:2}"
+Converted="/mnt/$DriveLetter${Rest//\\//}"
+
+echo "$Converted"

@@ -1,0 +1,30 @@
+#!/bin/bash
+# mtc - convert Linux path(s) to Windows UNC path for WSL
+# Supports multiple paths as arguments or via pipe
+
+convert_path() {
+    local Path="$1"
+
+    # Strip trailing slash
+    Path="${Path%/}"
+
+    # Remove leading slash so it doesn't add an extra backslash
+    Path="${Path#/}"
+
+    # Replace remaining / with \ for Windows
+    local Converted="${Path//\//\\}"
+
+    # Prepend UNC prefix with double backslash
+    echo "\\\\wsl.localhost\\kali-linux\\$Converted"
+}
+
+# Handle multiple arguments or piped input
+if [ $# -gt 0 ]; then
+    for p in "$@"; do
+        convert_path "$p"
+    done
+else
+    while IFS= read -r line; do
+        convert_path "$line"
+    done
+fi

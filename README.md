@@ -50,3 +50,6 @@ Or copy a Windows file using cp in WSL:
 cp $(ctm "D:\Projects\ExampleProject\file.txt") /mnt/d/Backup/
 
 Using ctm in a one-liner like this is super practical for scripts, pipelines, and ad-hoc terminal commands, because it bridges Windows and WSL paths seamlessly.
+
+Additionally:
+I have created a simple Windows Settings Enhancement. Execution requires a input of 1 for test mode, and 2 for execute. Will establish the Windows God-Mode Folder on a User Desktop
